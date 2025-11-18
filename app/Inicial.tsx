@@ -49,7 +49,7 @@ export default function Inicial() {
                   <TouchableOpacity style={styles.button}>
                           <View style={{ flexDirection: "row", alignItems: "center" }}>
                                 <MaterialIcons name="calendar-today" size={20} color="#fff" style={{ marginRight: 20}} />
-                                  <Text style={styles.buttonText} onPress={() => router.navigate('/servico')}>
+                                  <Text style={styles.buttonText} onPress={() => router.navigate('/agendarHorarioEt1')}>
                                   Agendar Agora
                               </Text>
                           </View>

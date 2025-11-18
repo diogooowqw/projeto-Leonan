@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { View, Animated, StyleSheet,Text } from "react-native";
 
-export default function Etapas() {
+export default function Etapas({Etapa1,Etapa2,}: {Etapa1?: number;Etapa2?: number;}) {
   const tubo = useRef(new Animated.Value(0)).current;
   const circulo = useRef(new Animated.Value(0)).current;
 
@@ -41,7 +41,7 @@ export default function Etapas() {
 
       <View style={styles.circulo}>
         <Animated.View style={[styles.circuloAgua, { height: alturaCirculo }]} />
-        <Text style={styles.text}>1</Text>
+        <Text style={styles.text}>{Etapa1}</Text>
       </View>
 
        <View style={styles.tuboContainer}>
@@ -49,7 +49,7 @@ export default function Etapas() {
       </View>
 
         <View style={styles.circulo}>
-            <Text style={styles.text}>2</Text>
+            <Text style={styles.text}>{Etapa2}</Text>
         <Animated.View />
       </View>
       
@@ -68,7 +68,7 @@ wrapper: {
   flexDirection: "row",
   alignItems: "center",
   gap: 10,
-  marginTop: 20,
+  marginTop: 15,
 
 },
 
