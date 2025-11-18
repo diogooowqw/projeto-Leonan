@@ -1,39 +1,68 @@
 
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { router } from "expo-router";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { useState } from "react";   
 
-export default function Inicial({mudarTela}:any) {
+
+
+export default function Inicial() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Bem vindo</Text>
 
-          <View style={styles.containerBarbearia}>
-              <Image
-               source={require("../assets/Barbearia.png")}
-               style={styles.image}
-               resizeMode="contain"
-              />
-           <Text style={{ fontSize: 24, fontFamily: "inter-bold",  }}>  Olá </Text>
-
-            <Text style={{ fontSize: 14, fontFamily: "inter-light", marginTop: 30 }}>  Seja bem vindo ao aplicativo da nossa barbearia </Text>
-
-           <View style={styles.buttonRow}>
-              <TouchableOpacity style={styles.button}>
-                      <Text style={styles.buttonText} >Conectar-se</Text>
-             </TouchableOpacity>
-
-              <TouchableOpacity style={styles.button}>
-                      <Text style={styles.buttonText} onPress={() => router.push('/cadastro')}>Inscreva-se</Text>
-             </TouchableOpacity>
-
-          
+            <View style={styles.cabecalho} > 
+                <View style={styles.icone}>
+                    <MaterialIcons name="content-cut" size={40} color={"#FFFFFF"}/>
+                </View>
 
 
-            </View>
+                <Text style={styles.title}>
+                    Barbearia {"\n"}Elite
+                     {"\n"}
+                  <Text style={{ fontWeight: "200" ,fontSize: 20}}>Tradição & Estilo</Text>
+                </Text>
                
-          </View>
-          
+             </View>
+
+              <Text style={styles.title2}>
+                  Seu estilo,
+                   {"\n"}
+                   <Text style={{ color: "#79FFD3" }}>nossa</Text>
+                   {"\n"}
+                   <Text style={{ color: "#79FFD3" }}>Arte</Text>
+              </Text>
+
+              <Text style={styles.title3}>Transformamos cada corte em
+                 uma obra.
+                   {"\n"}
+                 Agende online e
+                   {"\n"}
+                experimente o melhor da
+                  {"\n"}
+                barbearia
+                  {"\n"}
+                tradicional com toque moderno.
+                </Text>
+
+
+                  <TouchableOpacity style={styles.button}>
+                          <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                <MaterialIcons name="calendar-today" size={20} color="#fff" style={{ marginRight: 20}} />
+                                  <Text style={styles.buttonText} onPress={() => router.navigate('/servico')}>
+                                  Agendar Agora
+                              </Text>
+                          </View>
+                      </TouchableOpacity>
+
+                       <TouchableOpacity style={styles.buttonWtsap}>
+                          <View style={{ flexDirection: "row", alignItems: "center" }}>
+                                <MaterialIcons name="headphones" size={20} color="#fff" style={{ marginRight: 20 }} />
+                                  <Text style={styles.buttonText} onPress={() => router.navigate('/inicial')}>
+                                  WhatsApp
+                              </Text>
+                          </View>
+                      </TouchableOpacity>
     </View>
   );
 }
@@ -45,38 +74,69 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#1E293B",
   },
-  title: {
-    fontSize: 50,
-    color: "#FFFFFF",
-    marginTop: 50,
+  cabecalho:{
+    marginTop:-20,
+    backgroundColor:"#fff",
+    width:"110%",
+    height:"18%",
+    alignItems:"center",
+    flexDirection:"row",
+
+  },
+  title:{
+    fontSize: 33,
+    color: "#475569",
     fontWeight: "bold",
+    marginTop:20,
   },
-  containerBarbearia: {
-    alignItems: "center",
-    marginTop: 50,
-    backgroundColor: "#FFFFFF",
-    width: '95%',
-    height: '75%',
-    borderRadius: 20,
+
+  title2:{
+    fontSize: 50,
+    color: "#ffffffff",
+    fontWeight: "bold",
+    marginTop:40,
+    marginRight:110,
   },
-  image: {
-    width: '90%',
-    height: '70%',
+  title3:{
+    fontSize: 20,
+    color: "#FFFFFF",
+    marginTop:40,
+    fontWeight: "300",
+
   },
-  buttonRow: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginTop: 25,
-    gap: 15,
+  icone:{
+    alignItems:"center",
+    justifyContent:"center",
+    backgroundColor:"#059669",
+    width:60,
+    height:60,
+    marginLeft:20,
+    borderRadius:15,
+    marginRight:30,
   },
+  
   button: {
     backgroundColor: "#059669",
-    paddingVertical: 12,
-    paddingHorizontal: 25,
-    borderRadius: 20, 
+    paddingVertical: 20,
+    paddingHorizontal: 35,
+    borderRadius: 8,
+    marginTop: 40,
   },
   buttonText: {
     color: "#FFFFFF",
-    fontSize: 16,
+    fontSize: 20,
+   fontWeight: "bold",
   },
+    buttonWtsap: {
+    borderColor: "#ffff",
+    borderWidth: 1,
+    paddingVertical: 20,
+    paddingHorizontal: 53,
+    borderRadius: 8,
+    marginTop: 10,
+  },
+  icon: {
+    marginRight: 15,
+  },
+
 });

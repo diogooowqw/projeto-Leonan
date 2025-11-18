@@ -1,17 +1,28 @@
 import { useState } from "react";
 import { Text, View, StyleSheet, Image, TouchableOpacity,TextInput} from "react-native";
 import Checkbox from 'expo-checkbox';
+import { MaterialIcons } from '@expo/vector-icons';
+import { useRouter } from "expo-router";
 
 
 
-export default function Login() {
+
+
+
+export default function cadastro() {
   const [aceitouTermos, setAceitouTermos] = useState(false);
+  const router = useRouter();
   return (
     
     <View style={styles.container}>
 
-      <Text style={styles.title}>Cadastre-se</Text>
 
+    
+
+      <Text style={styles.title}>Cadastre-se</Text>
+        <TouchableOpacity style={{position: 'absolute', top: 40, left: 20}} onPress={() => router.back()}>
+        <MaterialIcons name="arrow-back" size={40} color={"#FFFFFF"}/>
+        </TouchableOpacity>
 
 
          <View style={styles.containerinputs}>
@@ -29,7 +40,7 @@ export default function Login() {
                       onValueChange={setAceitouTermos}
                       color={aceitouTermos ? "#10B981" : undefined}
                  />
-                    <Text style={styles.checkboxLabel}>Aceito os termos de uso</Text>
+                    <Text style={styles.checkboxLabel}>Lembrar-me</Text>
         </View>
 
      
@@ -55,7 +66,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 50,
     color: "#FFFFFF",
-    marginTop: 70,
+    marginTop: 90,
     fontWeight: "bold",
   },
 
