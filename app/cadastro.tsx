@@ -3,6 +3,8 @@ import { Text, View, StyleSheet, Image, TouchableOpacity,TextInput} from "react-
 import Checkbox from 'expo-checkbox';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useEffect } from "react";
 
 
 
@@ -11,7 +13,46 @@ import { useRouter } from "expo-router";
 
 export default function cadastro() {
   const [aceitouTermos, setAceitouTermos] = useState(false);
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmeSenha, setConfirmeSenha] = useState("");
+   const [mostrarSenha, setMostrarSenha] = useState(false);
+   const [mostrarConfirmeSenha, setMostrarConfirmeSenha] = useState(false);
+
+
+
+   const salvarUsuario = async () =>{
+    try {
+      const usuario = {
+        nome,
+        email,
+        senha,
+      };
+     
+       const lista = await AsyncStorage.getItem('usuarios');
+       let usuarios = lista ? JSON.parse(lista) : [];
+
+      usuarios.push(usuario);
+
+      await AsyncStorage.setItem('usuarios', JSON.stringify(usuarios));
+      console.log('Usuário salvo com sucesso!',usuario);
+    } catch (error) {
+      console.log('Erro ao salvar o usuário:', error);
+    }
+   }
   const router = useRouter();
+
+const isValid =
+  nome.trim() !== "" &&
+  email.trim() !== "" &&
+  senha.trim() !== "" &&
+  confirmeSenha.trim() !== "" &&
+  senha === confirmeSenha &&  
+  aceitouTermos;
+
+
+
   return (
     
     <View style={styles.container}>
@@ -26,11 +67,32 @@ export default function cadastro() {
 
 
          <View style={styles.containerinputs}>
-             <TextInput placeholder="Nome" style={styles.input} />
-             <TextInput placeholder="Email" style={styles.input} />
-             <TextInput placeholder="Senha" style={styles.input} />
-             <TextInput placeholder="Confirme sua senha" style={styles.input} />
+             <TextInput placeholder="Nome" style={styles.input} value={nome} onChangeText={setNome} />
 
+             <TextInput placeholder="Email" style={styles.input} value={email} onChangeText={setEmail}  keyboardType="email-address" />
+
+
+             <View >
+                    <TextInput placeholder="Senha" style={styles.input} value={senha} onChangeText={setSenha}     secureTextEntry={!mostrarSenha} />
+
+                    <TouchableOpacity style={styles.icon}   onPress={() => setMostrarSenha(!mostrarSenha)}>
+
+                   <MaterialIcons  name={mostrarSenha ? "visibility" : "visibility-off"} size={24} color="gray"/>
+
+             </TouchableOpacity>
+             </View>
+          
+              <View>
+                     <TextInput placeholder="Confirme sua senha" style={styles.input} value={confirmeSenha} onChangeText={setConfirmeSenha}  secureTextEntry={!mostrarConfirmeSenha}  />
+                     
+                          <TouchableOpacity style={styles.icon}   onPress={() => setMostrarConfirmeSenha(!mostrarConfirmeSenha)}>
+
+                      
+                        <MaterialIcons  name={mostrarConfirmeSenha ? "visibility" : "visibility-off"} size={24} color="gray"/>
+
+                  </TouchableOpacity>
+              </View>
+              
         </View>
     
 
@@ -40,13 +102,13 @@ export default function cadastro() {
                       onValueChange={setAceitouTermos}
                       color={aceitouTermos ? "#10B981" : undefined}
                  />
-                    <Text style={styles.checkboxLabel}>Lembrar-me</Text>
+                    <Text style={styles.checkboxLabel}>Termos de uso</Text>
         </View>
 
      
 
-            <TouchableOpacity style={styles.button}>
-                              <Text style={styles.buttonText}>REGISTRAR</Text>
+            <TouchableOpacity style={[styles.button, !isValid && { backgroundColor: "#4B5563" }]} disabled={!isValid} onPress={() => { salvarUsuario(); router.replace('/')}}>
+                              <Text style={styles.buttonText} >REGISTRAR</Text>
               </TouchableOpacity>
 
 
@@ -63,6 +125,12 @@ const styles = StyleSheet.create({
 
     backgroundColor: "#1E293B",
   },
+    icon: {
+    position: "absolute",
+    right: 10,
+    top: 18,
+  },
+
   title: {
     fontSize: 50,
     color: "#FFFFFF",

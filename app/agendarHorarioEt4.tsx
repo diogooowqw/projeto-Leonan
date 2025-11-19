@@ -5,8 +5,7 @@ import DivBranca from "../componentes/divBranca";
 import Etapas from "../componentes/etapas";
 import ButtonVerde from "../componentes/buttonverde";
 
-import { Picker } from "@react-native-picker/picker";
-import { Calendar } from "react-native-calendars";
+
 
 export default function agendarHorarioet4() {
 
@@ -27,6 +26,11 @@ export default function agendarHorarioet4() {
 
                      <ButtonVerde />
 
+            </View>
+
+
+            <View style={styles.containerResumo}>
+               <Text style={styles.titleResumo}>Resumo do Agendamento</Text>
             </View>
 
         </View>
@@ -59,6 +63,7 @@ export default function agendarHorarioet4() {
         fontWeight: "bold",
         marginTop: 10,
         color: "#595959",
+  
  
     },
        subtitle: {
@@ -77,4 +82,18 @@ export default function agendarHorarioet4() {
     marginBottom: 20,
     marginTop: 20,
   },
+   containerResumo: {
+    width: "90%",
+    height: "30%",
+    backgroundColor: "#FFFFFF",
+    marginTop: 20,
+    borderRadius: 20,
+   },
+   titleResumo: {
+    fontSize: 20,
+    fontWeight: "bold",
+     marginTop: 10,
+     color: "#595959",
+     marginLeft:20,
+   },
     });

@@ -1,5 +1,5 @@
 
-import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, Image, TouchableOpacity,Linking } from "react-native";
 import { router } from "expo-router";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useState } from "react";   
@@ -46,19 +46,19 @@ export default function Inicial() {
                 </Text>
 
 
-                  <TouchableOpacity style={styles.button}>
+                  <TouchableOpacity style={styles.button} onPress={() => router.navigate('/agendarHorarioEt1')}>
                           <View style={{ flexDirection: "row", alignItems: "center" }}>
                                 <MaterialIcons name="calendar-today" size={20} color="#fff" style={{ marginRight: 20}} />
-                                  <Text style={styles.buttonText} onPress={() => router.navigate('/agendarHorarioEt1')}>
+                                  <Text style={styles.buttonText} >
                                   Agendar Agora
                               </Text>
                           </View>
                       </TouchableOpacity>
 
-                       <TouchableOpacity style={styles.buttonWtsap}>
+                       <TouchableOpacity style={styles.buttonWtsap} onPress={()=> Linking.openURL('https://wa.me/5533987053323?text=Olá!')}>
                           <View style={{ flexDirection: "row", alignItems: "center" }}>
                                 <MaterialIcons name="headphones" size={20} color="#fff" style={{ marginRight: 20 }} />
-                                  <Text style={styles.buttonText} onPress={() => router.navigate('/inicial')}>
+                                  <Text style={styles.buttonText} >
                                   WhatsApp
                               </Text>
                           </View>
