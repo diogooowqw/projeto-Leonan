@@ -5,7 +5,7 @@ import { useState } from "react";
 import Cabecalhohorario from "../componentes/cabecalhohorario";
 import DivBranca from "../componentes/divBranca";
 import Etapas from "../componentes/etapas";
-import ButtonServiço from "../componentes/buttonSelecionar";
+import ButtonSelecionar from "../componentes/buttonSelecionar";
 import ButtonVerde from "../componentes/buttonverde";
 import { Button } from "@react-navigation/elements";
 
@@ -27,38 +27,38 @@ export default function servico() {
                 <Text style={styles.title}>Escolha o serviço</Text>
                  <Text style={styles.subtitle}>Selecione o serviço que deseja agendar</Text>
 
-                   <ButtonServiço>
+                   <ButtonSelecionar>
                     <Text style={styles.buttonText}>Cabelo </Text>
                     <View style={styles.containerText}>   
                         <Text style={styles.buttonTime}>45min </Text>
                         <Text style={styles.buttonPreço}>R$40</Text>
                     </View>
                     
-                    </ButtonServiço>
-                   <ButtonServiço>
+                    </ButtonSelecionar>
+                   <ButtonSelecionar>
                        <Text style={styles.buttonText}>Cabelo e Barba</Text>
                        <View style={styles.containerText}>   
                         <Text style={styles.buttonTime}>45min </Text>
                         <Text style={styles.buttonPreço}>R$40</Text>
                     </View>
                     
-                    </ButtonServiço>
-                   <ButtonServiço>
+                    </ButtonSelecionar>
+                   <ButtonSelecionar>
                        <Text style={styles.buttonText}>Sobrancelha</Text>
                           <View style={styles.containerText}>   
                         <Text style={styles.buttonTime}>45min </Text>
                         <Text style={styles.buttonPreço}>R$40</Text>
                     </View>
                     
-                    </ButtonServiço>
-                   <ButtonServiço>
+                    </ButtonSelecionar>
+                   <ButtonSelecionar>
                        <Text style={styles.buttonText}>Rapar o saco</Text>
                         <View style={styles.containerText}>   
                         <Text style={styles.buttonTime}>45min </Text>
                         <Text style={styles.buttonPreço}>R$40</Text>
                     </View>
                     
-                    </ButtonServiço>    
+                    </ButtonSelecionar>    
 
                     <ButtonVerde onPress={() => router.push('/agendarHorarioEt2')}/>
              </DivBranca>
