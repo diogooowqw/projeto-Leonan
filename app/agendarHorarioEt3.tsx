@@ -4,7 +4,8 @@ import Cabecalhohorario from "../componentes/cabecalhohorario";
 import DivBranca from "../componentes/divBranca";
 import Etapas from "../componentes/etapas";
 import ButtonVerde from "../componentes/buttonverde";
-
+import { Alert } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Picker } from "@react-native-picker/picker";
 import { Calendar } from "react-native-calendars";
 import { router } from "expo-router";
@@ -20,11 +21,35 @@ export default function agendarHorarioet2() {
    const [opcao, setOpcao] = useState("");
 
 
+
+   const salvardadosStorage = async() => {
+
+    try{
+            const dataEHora = {
+                data: selected,
+                hora: opcao,
+            };
+            
+        if(selected && opcao){
+        
+            await AsyncStorage.setItem('dadosDataHora', JSON.stringify(dataEHora) );
+            console.log('Data e hora salvos!', dataEHora);
+            router.navigate('/agendarHorarioEt4');
+        }
+        else{
+            Alert.alert('Erro', 'Data ou hora não selecionada para salvar.');
+        }
+    }
+    catch(error){
+        console.log('Erro ao salvar os dados:', error);
+    }
+   }
+
   return (
     <View style={styles.container}>
         <Cabecalhohorario />
 
-         <Etapas Etapa1={3} Etapa2={4} />
+         <Etapas Etapa1={3} Etapa2={4} tuboMeioAtivo={!!selected} />
 
             <DivBranca>
                 <Text style={styles.title}>Escolha a data e hora</Text>
@@ -61,16 +86,20 @@ export default function agendarHorarioet2() {
                 <View style={styles.pickerContainer}>
                   <Picker selectedValue={opcao} onValueChange={(itemValue) => setOpcao(itemValue)}style={styles.picker} >
                     <Picker.Item label="Horários Disponíveis" value="" />
-                    <Picker.Item label="8:00" value="opcao1" />
-                    <Picker.Item label="9:00" value="opcao2" />
-                    <Picker.Item label="10:00" value="opcao3" />
-                     <Picker.Item label="11:00" value="opcao1" />
-                    <Picker.Item label="12:00" value="opcao2" />
-                    <Picker.Item label="10:00" value="opcao3" />
+                    <Picker.Item label="8:00" value="8:00" />
+                    <Picker.Item label="9:00" value="9:00" />
+                    <Picker.Item label="10:00" value="10:00" />
+                    <Picker.Item label="11:00" value="11:00" />
+                    <Picker.Item label="12:00" value="12:00" />
+                    <Picker.Item label="13:00" value="13:00" />
+                    <Picker.Item label="14:00" value="14:00" />
+                    <Picker.Item label="15:00" value="15:00" />
+                    <Picker.Item label="16:00" value="16:00" />
+                    <Picker.Item label="17:00" value="17:00" />
                   </Picker>
                 </View>
              
-               <ButtonVerde onPress={() => router.push('/agendarHorarioEt4')} />
+               <ButtonVerde onPress={() => salvardadosStorage()} />
                 
             </DivBranca>
          </View>

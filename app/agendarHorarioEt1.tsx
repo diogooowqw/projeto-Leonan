@@ -9,7 +9,7 @@ import Etapas from "../componentes/etapas";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function servico() {
-  const [valor, setValor] = useState<any>(null);//termina de pegar os valores dos dados para enviar para o local estorage
+  const [valor, setValor] = useState<any>(null);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const salvardadosStorage = async() => {
@@ -55,9 +55,7 @@ export default function servico() {
     console.log("Botão pressionado:", dados);
   };
 
-  const animation = () => {
-      
-  }
+ 
 
 
   return (
