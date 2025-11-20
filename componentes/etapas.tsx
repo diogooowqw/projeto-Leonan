@@ -1,24 +1,34 @@
 import React, { useRef, useEffect } from "react";
 import { View, Animated, StyleSheet,Text } from "react-native";
 
-export default function Etapas({Etapa1,Etapa2,}: {Etapa1?: number;Etapa2?: number;}) {
+export default function Etapas({Etapa1,Etapa2, tuboMeioAtivo}: {Etapa1?: number;Etapa2?: number;tuboMeioAtivo?: boolean;}) {
   const tubo = useRef(new Animated.Value(0)).current;
   const circulo = useRef(new Animated.Value(0)).current;
+  const tuboMeio = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.sequence([
       Animated.timing(tubo, {
         toValue: 1,
-        duration: 2000,
+        duration: 700,
         useNativeDriver: false
       }),
       Animated.timing(circulo, {
         toValue: 1,
-        duration: 2000,
+        duration: 700,
         useNativeDriver: false
       })
     ]).start();
   }, []);
+
+    useEffect(() => {
+    Animated.timing(tuboMeio, {
+      toValue: tuboMeioAtivo ? 1 : 0,
+      duration: 600,
+      useNativeDriver: false,
+    }).start();
+  }, [tuboMeioAtivo]);
+
 
   const larguraTubo = tubo.interpolate({
     inputRange: [0, 1],
@@ -29,6 +39,12 @@ export default function Etapas({Etapa1,Etapa2,}: {Etapa1?: number;Etapa2?: numbe
     inputRange: [0, 1],
     outputRange: ["0%", "100%"]
   });
+    const larguraTuboMeio = tuboMeio.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0%", "100%"],
+  });
+
+
 
   return (
     <View style={styles.wrapper}>
@@ -45,7 +61,7 @@ export default function Etapas({Etapa1,Etapa2,}: {Etapa1?: number;Etapa2?: numbe
       </View>
 
        <View style={styles.tuboContainer}>
-        <Animated.View  />
+        <Animated.View style={[styles.tuboAgua, { width: larguraTuboMeio }]} />
       </View>
 
         <View style={styles.circulo}>

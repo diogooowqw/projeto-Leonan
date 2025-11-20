@@ -1,26 +1,69 @@
 import { router } from "expo-router";
 import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View,Alert } from "react-native";
 import ButtonSelecionar from "../componentes/buttonSelecionar";
 import ButtonVerde from "../componentes/buttonverde";
 import Cabecalhohorario from "../componentes/cabecalhohorario";
 import DivBranca from "../componentes/divBranca";
 import Etapas from "../componentes/etapas";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function servico() {
   const [valor, setValor] = useState<any>(null);//termina de pegar os valores dos dados para enviar para o local estorage
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
+  const salvardadosStorage = async() => {
+   
+    
+
+    try{
+     const  dadosServico = {
+        servico: valor,
+      };
+      if(valor){
+        await AsyncStorage.setItem('dadosServico', JSON.stringify(dadosServico) );
+       console.log('Dados do serviço salvos!', dadosServico);
+       router.navigate('/agendarHorarioEt2');
+      }
+       else {
+            Alert.alert('Erro', 'Nenhum serviço selecionado para salvar.');
+       }
+
+    }
+   
+      
+    
+    catch(error){
+      console.log('Erro ao salvar os dados:', error);
+    }
+  };
+
+
   const handlePress = (dados: any) => {
-    setValor(dados);
-    setSelectedId((prev) => (prev === dados.id ? null : dados.id)); 
+     setSelectedId((prev)=> {
+      if (prev === dados.id) {
+        setValor(null);
+        return null;
+     }
+    
+     else{
+          setValor(dados);
+          return dados.id;
+     }
+     });
+
     console.log("Botão pressionado:", dados);
   };
 
+  const animation = () => {
+      
+  }
+
+
   return (
-    <View style={styles.container}>//conclui a animation dos buttons 
+    <View style={styles.container}>
       <Cabecalhohorario />
-       <Etapas Etapa1={1} Etapa2={2} />
+       <Etapas Etapa1={1} Etapa2={2} tuboMeioAtivo={!!selectedId}/>
 
       <DivBranca>
         <Text style={styles.title}>Escolha o serviço</Text>
@@ -76,10 +119,10 @@ export default function servico() {
           </View>
         </ButtonSelecionar>
 
-        <ButtonVerde onPress={() => router.push("/agendarHorarioEt2")} />/tem que colocar para continar somente qunado um button for escolhido blz
+        <ButtonVerde onPress={() => { salvardadosStorage();}}  />
       </DivBranca>
     </View>
-  );
+  );//tem que colocar para continuar somente quando um button for escolhido blz
 }
 
 const styles = StyleSheet.create({
