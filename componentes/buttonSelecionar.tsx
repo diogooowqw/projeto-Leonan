@@ -5,7 +5,7 @@ type Props = {
   children?: React.ReactNode;
   dados?: any;
   onPress?: (dados: any) => void;
-  selecionado?: boolean; // modo controlado
+  selecionado?: boolean; 
 };
 
 export default function ButtonSelecionar({ children, dados, onPress, selecionado }: Props) {

@@ -8,6 +8,8 @@ import Etapas from "../componentes/etapas";
 import ButtonSelecionar from "../componentes/buttonSelecionar";
 import ButtonVerde from "../componentes/buttonverde";
 import { Button } from "@react-navigation/elements";
+import asyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from "react-native";
 
 
 
@@ -15,6 +17,49 @@ import { Button } from "@react-navigation/elements";
 
 
 export default function agendarHorarioet2() {
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [valor, setValor] = useState<any>(null);
+
+
+const salvarBarbeiroStorage = async() => {
+    try{
+
+     const  dadosBarbeiro = {
+        barbeiro: valor,
+      };
+
+      if(valor){
+        await asyncStorage.setItem('dadosBarbeiro', JSON.stringify(dadosBarbeiro) );
+       console.log('Dados do barbeiro salvos!', dadosBarbeiro);
+       router.navigate('/agendarHorarioEt3');
+      }
+      else{
+            Alert.alert('Erro', 'Nenhum barbeiro selecionado para salvar.');
+      }
+    }
+    
+   catch(error){
+      console.log('Erro ao salvar os dados:', error);
+    }
+  };
+
+
+  
+  const handlePress = (dados: any) => {
+     setSelectedId((prev)=> {
+      if (prev === dados.id) {
+        setValor(null);
+        return null;
+     }
+    
+     else{
+          setValor(dados);
+          return dados.id;
+     }
+     });
+
+    console.log("Botão pressionado:", dados);
+  };
 
   return (
 
@@ -22,13 +67,16 @@ export default function agendarHorarioet2() {
 
         <Cabecalhohorario />
 
-         <Etapas Etapa1={2} Etapa2={3} />
+         <Etapas Etapa1={2} Etapa2={3} tuboMeioAtivo={!!selectedId} />
       
          <DivBranca>
           <Text style={styles.title}>Escolha o profissonal</Text>
           <Text style={styles.subtitle}>Selecione o barbeiro da sua preferência</Text>
 
-             <ButtonSelecionar>
+             <ButtonSelecionar 
+               dados={{ id: 2, barbeiro: "Eltin Dos Cortes" }}
+              selecionado={selectedId === 2}
+             onPress={(d) => handlePress(d)}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                         <MaterialIcons name="person" size={35} color="#1E293B" />     
 
@@ -39,7 +87,9 @@ export default function agendarHorarioet2() {
 
              </ButtonSelecionar>
 
-               <ButtonSelecionar>
+               <ButtonSelecionar dados={{ id: 3, barbeiro: "Kaellzadas" }}
+               selecionado={selectedId === 3}
+               onPress={(d) => handlePress(d)}>
                      <View style={{flexDirection: 'row', alignItems: 'center'}}>
                         <MaterialIcons name="person" size={35} color="#1E293B" />     
 
@@ -51,7 +101,9 @@ export default function agendarHorarioet2() {
              </ButtonSelecionar>
 
 
-               <ButtonSelecionar>
+               <ButtonSelecionar dados={{ id: 4, barbeiro: "Dioguin" }}
+               selecionado={selectedId === 4}
+               onPress={(d) => handlePress(d)}>
                      <View style={{flexDirection: 'row', alignItems: 'center'}}>
                         <MaterialIcons name="person" size={35} color="#1E293B" />     
 
@@ -62,7 +114,9 @@ export default function agendarHorarioet2() {
 
              </ButtonSelecionar>
 
-               <ButtonSelecionar>
+               <ButtonSelecionar dados={{ id: 5, barbeiro: "Luisin" }}
+               selecionado={selectedId === 5}
+               onPress={(d) => handlePress(d)}>
                      <View style={{flexDirection: 'row', alignItems: 'center'}}>
                         <MaterialIcons name="person" size={35} color="#1E293B" />     
 
@@ -73,7 +127,7 @@ export default function agendarHorarioet2() {
 
              </ButtonSelecionar>
             
-                <ButtonVerde onPress={() => router.push('/agendarHorarioEt3')}/>
+                <ButtonVerde onPress={() => salvarBarbeiroStorage()}/>
          </DivBranca>
     </View>
 

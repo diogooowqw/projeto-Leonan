@@ -82,7 +82,6 @@ export default function Login() {
 const styles = StyleSheet.create({
   title: {
     fontSize: 50,
-
     color: "#FFFFFF",
     marginTop: 150,
     fontWeight: "bold",
