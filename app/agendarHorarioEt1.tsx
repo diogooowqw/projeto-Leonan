@@ -77,7 +77,7 @@ export default function servico() {
 
              <View style={styles.containerText}>
                <Text style={styles.buttonTime}>45min </Text>
-               <Text style={styles.buttonPreço}>R$40</Text>
+               <Text style={styles.buttonPreço}>R$30</Text>
             </View>
         </ButtonSelecionar>
 
@@ -88,8 +88,8 @@ export default function servico() {
         >
           <Text style={styles.buttonText}>Cabelo e Barba</Text>
               <View style={styles.containerText}>
-                 <Text style={styles.buttonTime}>60min </Text>
-                 <Text style={styles.buttonPreço}>R$60</Text>
+                 <Text style={styles.buttonTime}>50min </Text>
+                 <Text style={styles.buttonPreço}>R$75</Text>
               </View>
         </ButtonSelecionar>
 
@@ -100,8 +100,8 @@ export default function servico() {
         >
           <Text style={styles.buttonText}>Sobrancelha</Text>
                 <View style={styles.containerText}>
-                   <Text style={styles.buttonTime}>30min </Text>
-                  <Text style={styles.buttonPreço}>R$25</Text>
+                   <Text style={styles.buttonTime}>10min </Text>
+                  <Text style={styles.buttonPreço}>R$10</Text>
                </View>
          </ButtonSelecionar>
 
@@ -110,10 +110,10 @@ export default function servico() {
           selecionado={selectedId === 5}
           onPress={(d) => handlePress(d)}
         >
-          <Text style={styles.buttonText}>Rapar o saco</Text>
+          <Text style={styles.buttonText}>Barba</Text>
           <View style={styles.containerText}>
-            <Text style={styles.buttonTime}>45min </Text>
-            <Text style={styles.buttonPreço}>R$40</Text>
+            <Text style={styles.buttonTime}>20min </Text>
+            <Text style={styles.buttonPreço}>R$45</Text>
           </View>
         </ButtonSelecionar>
 

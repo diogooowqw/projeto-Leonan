@@ -123,7 +123,7 @@ const salvarBarbeiroStorage = async() => {
                         <Text style={styles.buttonTitle}>Luisin</Text>
 
                 </View>     
-                        <Text style={styles.buttonSubtitle}>Mister rapa saco</Text>
+                        <Text style={styles.buttonSubtitle}>Mister barbas</Text>
 
              </ButtonSelecionar>
             
